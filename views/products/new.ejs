@@ -1,0 +1,24 @@
+<%layout('layouts/boilerPlate')%>
+
+<div class="mt-5">
+    <form action="/products" method="POST">
+        <div class="mb-3">
+          <label for="productName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="productName" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="img" class="form-label">Img</label>
+            <input type="text" class="form-control" id="img" name="img">
+          </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="description" id="description" cols="30" rows="5"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
