@@ -1,6 +1,7 @@
 const express= require('express');
 const router= express.Router();
 const Product= require('../models/products');
+const Review= require('../models/review');
 router.use(express.urlencoded({extended:true}));
 const methodOverride = require('method-override');
 router.use(methodOverride('__method'));
@@ -46,6 +47,10 @@ router.patch('/products/:Id', async(req,res)=>{
 
 router.delete('/products/:Id',async(req,res)=>{
     const {Id}= req.params;
+    // const pdt= await Product.findById(Id);
+    // for(let r of pdt.reviews){
+    //    await  Review.findByIdAndDelete(r);
+    // }
     await Product.findByIdAndDelete(Id);
     res.redirect('/products');
 })

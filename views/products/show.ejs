@@ -1,6 +1,6 @@
 <%layout('layouts/boilerPlate')%>
 
-<div class="row">
+<div class="row auto-x">
     
         <div class="col-lg-4 mx-1 mb-3" style="margin-top: 70px;">
             <div class="card" style="width: 18rem;">
@@ -40,7 +40,7 @@
               </fieldset>
               
           </div>
-          <div class="mb-3">
+          <div class="mb-3 ">
             <label for="comment" class="form-label">Description</label>
             <textarea name="comment" class="form-control" id="comment" cols="30" rows="3"></textarea>
           </div>
@@ -48,12 +48,13 @@
           </form>
 
           <%for(let item of pdt.reviews){%>
-            <div class="m-3 border border-dark">
+            <div class="m-3 p-1">
               <p class="starability-result" data-rating="<%=item.rating%>">
                 Rated: <%=item.rating%> stars
               </p>
              
               <p><%=item.comment%></p>
+              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           <%}%>
         </div>

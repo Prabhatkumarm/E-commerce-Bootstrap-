@@ -1,7 +1,7 @@
 <%layout('layouts/boilerPlate')%>
 
 <div class="mt-5 col-lg-4 mx-auto">
-    <form action="/products" method="POST" novalidate>
+    <form action="/products" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
           <label for="productName" class="form-label">Name</label>
           <input type="text" class="form-control" id="productName" name="name" required>
@@ -22,3 +22,25 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+
+<script>
+  (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
