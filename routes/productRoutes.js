@@ -2,32 +2,52 @@ const express= require('express');
 const router= express.Router();
 const Product= require('../models/products');
 const Review= require('../models/review');
+const {validateProducts}=require('../middleware');
 router.use(express.urlencoded({extended:true}));
 const methodOverride = require('method-override');
 router.use(methodOverride('__method'));
 
 router.get('/products',async(req,res)=>{
-    const products= await Product.find({});
-    res.render('products/index',{products});
+    try {
+        const products= await Product.find({});
+        res.render('products/index',{products});
+    } catch (error) {
+        res.status(404).render('error',{err:error});
+    }
 })
 
 router.get('/products/new',(req,res)=>{
-    res.render('products/new');
+    try {
+        res.render('products/new');
+    } catch (error) {
+        res.status(404).render('products/error',{err:error.message});
+    }
+    
 })
 
-router.post('/products' ,async(req,res)=>{
-    const {name,img,price,description}= req.body;
-    await Product.create({name,img,price,description});
-    res.redirect('/products');
+router.post('/products' ,validateProducts, async(req,res)=>{
+    try {
+        const {name,img,price,description}= req.body;
+        await Product.create({name,img,price,description});
+        res.redirect('/products');
+    } catch (error) {
+        res.status(404).render('products/error',{err:error});
+    }
+    
 })
 
 router.get('/products/:Id', async(req,res)=>{
-    const { Id } = req.params;
+    try {
+        const { Id } = req.params;
     
-    const pdt =  await Product.findById(Id).populate('reviews');
+        const pdt =  await Product.findById(Id).populate('reviews');
     
     
-    res.render('products/show',{pdt});
+        res.render('products/show',{pdt});
+    } catch (error) {
+        res.status(404).render('error',{err:error});
+    }
+    
 })
 
 router.get('/products/:Id/edit',async(req,res)=>{
