@@ -5,7 +5,19 @@ const validateProducts=(req,res,next)=>{
     const {error}= joiProductSchema.validate({name,img,price,description});
     if(error){
         const msg=error.details.map((err)=>err.message).join(',');
-        console.log(error);
+        // console.log(error);
+        // res.send("because of middleware");
+        return res.render('products/error',{err:msg});
+    }
+    next();
+}
+
+const validateReviews=(req,res,next)=>{
+    const {rating,comment}=req.body;
+    const {error}=joiReviewSchema.validate({rating,comment});
+    if(error){
+        const msg=error.details.map((err)=>err.message).join(',');
+        // console.log(error);
         // res.send("because of middleware");
         return res.render('products/error',{err:msg});
     }
@@ -14,5 +26,6 @@ const validateProducts=(req,res,next)=>{
 
 
 module.exports={
-    validateProducts
+    validateProducts,
+    validateReviews
 }

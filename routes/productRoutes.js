@@ -2,7 +2,7 @@ const express= require('express');
 const router= express.Router();
 const Product= require('../models/products');
 const Review= require('../models/review');
-const {validateProducts}=require('../middleware');
+const {validateProducts,validateReviews}=require('../middleware');
 router.use(express.urlencoded({extended:true}));
 const methodOverride = require('method-override');
 router.use(methodOverride('__method'));
