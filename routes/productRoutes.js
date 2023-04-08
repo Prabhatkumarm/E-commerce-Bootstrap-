@@ -45,7 +45,7 @@ router.get('/products/:Id', async(req,res)=>{
     
         res.render('products/show',{pdt});
     } catch (error) {
-        res.status(404).render('error',{err:error});
+        res.status(404).render('products/error',{err:error});
     }
     
 })
@@ -61,7 +61,7 @@ router.patch('/products/:Id', async(req,res)=>{
     const {name, img, price, description}= req.body;
     const pdt =  await Product.findByIdAndUpdate(Id,{name, img, price, description});
     
-
+    req.flash('msg','Edited product successfully');
     res.redirect(`/products/${Id}`);
 })
 

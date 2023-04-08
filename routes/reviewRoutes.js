@@ -13,9 +13,10 @@ router.post('/products/:Id/review',validateReviews,async(req,res)=>{
         await review.save();
         product.reviews.push(review); //we push entire review but internally mongoose will take only its id and save 
         await product.save();
-        
+        req.flash('msg','Added your review successfully');
         res.redirect(`/products/${Id}`); 
     } catch (error) {
+        
         res.status(200).send(error.message);
     }
        
