@@ -33,6 +33,9 @@ app.use(productRoutes);
 const reviewRoute= require('./routes/reviewRoutes');
 app.use(reviewRoute);
 
+const authRoute= require('./routes/authRoutes');
+app.use(authRoute);
+
 app.use(express.urlencoded({extended:true}));
 
 app.set('view engine','ejs');
