@@ -5,6 +5,20 @@ const path= require('path');
 const ejsMate= require('ejs-mate');
 app.engine('ejs',ejsMate);
 
+
+//pasport for authentication
+
+const passport= require('passport');
+const localStrategy  = require('passport-local');
+const User= require('./models/users');
+passport.use(new localStrategy(User.authenticate));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+//connecting nodejs to database using mongoose package
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/Ecommerce')
 .then(()=>{console.log('DB connected')})

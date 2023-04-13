@@ -9,6 +9,8 @@ const userSchema=new mongoose.Schema({
     }
 });
 
+
+//username and password are directly added to the model by passport local mongoose
 userSchema.plugin(passportLM);
 
 const User= mongoose.model('User',userSchema);
